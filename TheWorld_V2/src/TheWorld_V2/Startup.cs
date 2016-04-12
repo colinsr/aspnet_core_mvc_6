@@ -18,6 +18,8 @@ namespace TheWorld_V2
         public void Configure(IApplicationBuilder app)
         {
             app.UseStaticFiles();
+
+            app.UseMvc();
         }
 
         // Entry point for the application.
