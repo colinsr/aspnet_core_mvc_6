@@ -8,5 +8,15 @@ namespace TheWorld_V2.Controllers.Web
         {
             return View();
         }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }
