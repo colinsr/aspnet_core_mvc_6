@@ -22,15 +22,17 @@
     //        alert(me.text());
     //    });
     //});
-    var $button = $("#sidebarToggle");
     var $sidebarAndWrapper = $("#sidebar,#wrapper");
+    var $icon = $("#sidebarToggle i.fa");
 
-    $button.on("click", function() {
+    $("#sidebarToggle").on("click", function () {
         $sidebarAndWrapper.toggleClass("hide-sidebar");
         if ($sidebarAndWrapper.hasClass("hide-sidebar")) {
-            $(this).text("Show Sidebar");
+            $icon.removeClass("fa-angle-left");
+            $icon.addClass("fa-angle-right");
         } else {
-            $(this).text("Hide Sidebar");
+            $icon.removeClass("fa-angle-right");
+            $icon.addClass("fa-angle-left");
         }
     });
 })();
