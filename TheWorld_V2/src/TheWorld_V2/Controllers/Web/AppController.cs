@@ -1,4 +1,5 @@
 using Microsoft.AspNet.Mvc;
+using TheWorld_V2.ViewModels;
 
 namespace TheWorld_V2.Controllers.Web
 {
@@ -15,6 +16,12 @@ namespace TheWorld_V2.Controllers.Web
         }
 
         public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact(ContactViewModel model)
         {
             return View();
         }
