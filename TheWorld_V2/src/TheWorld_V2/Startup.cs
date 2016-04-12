@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace TheWorld_V2
@@ -19,7 +18,14 @@ namespace TheWorld_V2
         {
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseMvc(builder =>
+            {
+                builder.MapRoute(
+                    name: "Default", 
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new { controller = "App", action = "Index" }
+                );
+            });
         }
 
         // Entry point for the application.
