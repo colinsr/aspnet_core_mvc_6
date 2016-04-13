@@ -6,5 +6,7 @@ namespace TheWorld_V2.Models
     {
         IEnumerable<Trip> GetAllTrips();
         IEnumerable<Trip> GetAllTripsWithStops();
+        void AddTrip(Trip newTrip);
+        bool SaveAll();
     }
 }

@@ -43,6 +43,16 @@ namespace TheWorld_V2.Models
                 _logger.LogError("couldn't look up the thing", ex.Message);
                 return null;
             }
-        } 
+        }
+
+        public void AddTrip(Trip newTrip)
+        {
+            _context.Add(newTrip);
+        }
+
+        public bool SaveAll()
+        {
+            return _context.SaveChanges() > 0;
+        }
     }
 }
