@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
@@ -44,17 +45,21 @@ namespace TheWorld_V2
         {
             app.UseStaticFiles();
 
-            app.UseMvc(builder =>
-            {
-                builder.MapRoute(
-                    name: "Default", 
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "App", action = "Index" }
-                );
-            });
+            app.UseMvc(builder => { ConfigureRouteDefaults(builder); });
         }
+
 
         // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+
+        //helpers...
+        private static void ConfigureRouteDefaults(IRouteBuilder builder)
+        {
+            builder.MapRoute(
+                name: "Default",
+                template: "{controller}/{action}/{id?}",
+                defaults: new {controller = "App", action = "Index"}
+            );
+        }
     }
 }
