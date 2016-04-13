@@ -34,6 +34,7 @@ namespace TheWorld_V2
                 .AddDbContext<WorldContext>();
 
             services.AddTransient<WorldContextSeedData>();
+            services.AddScoped<IWorldRepository, WorldRepository>();
 
 #if DEBUG
             services.AddScoped<IMailService, DebugMailService>();//wiring up DI here....

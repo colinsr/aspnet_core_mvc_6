@@ -9,17 +9,17 @@ namespace TheWorld_V2.Controllers.Web
     public class AppController : Controller
     {
         private readonly IMailService _mailService;
-        private readonly WorldContext _context;
+        private readonly IWorldRepository _repo;
 
-        public AppController(IMailService mailService, WorldContext context)
+        public AppController(IMailService mailService, IWorldRepository repo)
         {
             _mailService = mailService;
-            _context = context;
+            _repo = repo;
         }
 
         public IActionResult Index()
         {
-            var trips = _context.Trips.OrderBy(t => t.Name).ToList();
+            var trips = _repo.GetAllTrips();
 
             return View(trips);
         }
