@@ -3,6 +3,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using TheWorld_V2.Models;
 using TheWorld_V2.Services;
@@ -29,6 +30,8 @@ namespace TheWorld_V2
         {
             services.AddMvc();
 
+            services.AddLogging();
+
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<WorldContext>();
@@ -44,8 +47,10 @@ namespace TheWorld_V2
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, WorldContextSeedData seedData)
+        public void Configure(IApplicationBuilder app, WorldContextSeedData seedData, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddDebug(LogLevel.Warning);
+
             app.UseStaticFiles();
 
             app.UseMvc(ConfigureRouteDefaults);
