@@ -54,5 +54,10 @@ namespace TheWorld_V2.Models
         {
             return _context.SaveChanges() > 0;
         }
+
+        public Trip GetTripByName(string tripName)
+        {
+            return _context.Trips.Where(t => t.Name == tripName).Include(t => t.Stops).FirstOrDefault();
+        }
     }
 }

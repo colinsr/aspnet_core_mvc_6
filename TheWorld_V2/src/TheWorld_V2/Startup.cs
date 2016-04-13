@@ -57,7 +57,12 @@ namespace TheWorld_V2
 
             app.UseStaticFiles();
 
-            Mapper.Initialize( config => config.CreateMap<Trip, TripViewModel>().ReverseMap() );
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<Trip, TripViewModel>().ReverseMap();
+                config.CreateMap<Stop, StopViewModel>().ReverseMap();
+            });
+                
 
             app.UseMvc(ConfigureRouteDefaults);
 
