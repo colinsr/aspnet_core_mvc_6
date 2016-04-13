@@ -3,6 +3,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
+using TheWorld_V2.Models;
 using TheWorld_V2.Services;
 
 namespace TheWorld_V2
@@ -26,6 +27,11 @@ namespace TheWorld_V2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<WorldContext>();
+
 #if DEBUG
             services.AddScoped<IMailService, DebugMailService>();//wiring up DI here....
 #else
