@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.Logging;
 using TheWorld_V2.Models;
 using TheWorld_V2.ViewModels;
 
@@ -12,10 +13,12 @@ namespace TheWorld_V2.Controllers.Api
     public class TripController : Controller
     {
         private readonly IWorldRepository _repo;
+        private readonly ILogger<TripController> _logger;
 
-        public TripController(IWorldRepository repo)
+        public TripController(IWorldRepository repo, ILogger<TripController> logger)
         {
             _repo = repo;
+            _logger = logger;
         }
 
         [HttpGet("")]
@@ -36,6 +39,7 @@ namespace TheWorld_V2.Controllers.Api
                     var newTrip = Mapper.Map<Trip>(viewModel);
 
                     //save to db.
+                    _logger.LogInformation("Attempting to save new trip into the database");
 
                     Response.StatusCode = (int) HttpStatusCode.Created;
                     return Json( Mapper.Map<TripViewModel>(newTrip) );
@@ -43,8 +47,9 @@ namespace TheWorld_V2.Controllers.Api
             }
             catch (Exception ex)
             {
+                _logger.LogError("Failed to save new trip", ex);
                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return Json(new { Message = ex.Message, ModelState = ModelState }); 
+               return Json(new { Message = ex.Message, ModelState = ModelState }); 
             }
 
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
