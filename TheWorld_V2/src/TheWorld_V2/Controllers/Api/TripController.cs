@@ -10,7 +10,7 @@ using TheWorld_V2.ViewModels;
 
 namespace TheWorld_V2.Controllers.Api
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/trips")]
     public class TripController : Controller
     {
@@ -26,7 +26,7 @@ namespace TheWorld_V2.Controllers.Api
         [HttpGet("")]
         public JsonResult Get()
         {
-            var trips = Mapper.Map<IEnumerable<TripViewModel>>(_repo.GetUserTripsWithStops(User.Identity.Name));
+            var trips = Mapper.Map<IEnumerable<TripViewModel>>(_repo.GetUserTripsWithStops("colin"));//User.Identity.Name));
 
             return Json(trips);
         }

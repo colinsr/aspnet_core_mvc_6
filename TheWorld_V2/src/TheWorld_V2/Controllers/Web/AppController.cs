@@ -23,7 +23,7 @@ namespace TheWorld_V2.Controllers.Web
             return View();
         }
 
-        //[Authorize]
+        [Authorize]
         public IActionResult Trips()
         {
             var trips = _repo.GetAllTrips();

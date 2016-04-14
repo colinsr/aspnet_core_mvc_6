@@ -13,7 +13,7 @@ using TheWorld_V2.ViewModels;
 
 namespace TheWorld_V2.Controllers.Api
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/trips/{tripName}/stops")]
     public class StopController : Controller
     {
