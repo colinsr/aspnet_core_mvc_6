@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Storage;
 
 namespace TheWorld_V2.Models
 {
