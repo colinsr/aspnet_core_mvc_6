@@ -55,18 +55,24 @@ namespace TheWorld_V2.Models
             return _context.SaveChanges() > 0;
         }
 
-        public Trip GetTripByName(string tripName)
+        public Trip GetTripByName(string tripName, string userName)
         {
-            return _context.Trips.Where(t => t.Name == tripName).Include(t => t.Stops).FirstOrDefault();
+            return _context.Trips.Where(t => t.Name == tripName && t.UserName == userName)
+                .Include(t => t.Stops).FirstOrDefault();
         }
 
-        public void AddStop(string tripName, Stop newStop)
+        public void AddStop(string tripName, Stop newStop, string userName)
         {
-            var theTrip = GetTripByName(tripName);
+            var theTrip = GetTripByName(tripName, userName);
             newStop.Order = theTrip.Stops.Max(s => s.Order) + 1;
             theTrip.Stops.Add(newStop);
 
             _context.Add(newStop);
+        }
+
+        public IEnumerable<Trip> GetUserTripsWithStops(string name)
+        {
+            return GetAllTripsWithStops().Where(t => t.UserName == name).ToList();
         }
     }
 }
