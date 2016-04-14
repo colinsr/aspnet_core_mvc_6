@@ -8,9 +8,10 @@ using TheWorld_V2.Models;
 namespace TheWorld_V2.Migrations
 {
     [DbContext(typeof(WorldContext))]
-    partial class WorldContextModelSnapshot : ModelSnapshot
+    [Migration("20160414152038_IdentityEntities")]
+    partial class IdentityEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
