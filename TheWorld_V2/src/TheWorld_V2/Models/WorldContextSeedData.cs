@@ -28,7 +28,7 @@ namespace TheWorld_V2.Models
                     Email       = "colin@theworld.com"
                 };
 
-                await _userManger.CreateAsync(newUser, "P@ssword!");
+                await _userManger.CreateAsync(newUser, "P@ssword1234!");
             }
 
 

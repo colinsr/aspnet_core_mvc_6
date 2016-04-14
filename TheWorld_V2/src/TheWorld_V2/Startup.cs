@@ -61,7 +61,7 @@ namespace TheWorld_V2
                     }
                 };
             })
-      .AddEntityFrameworkStores<WorldContext>();
+            .AddEntityFrameworkStores<WorldContext>();
 
             services.AddLogging();
 

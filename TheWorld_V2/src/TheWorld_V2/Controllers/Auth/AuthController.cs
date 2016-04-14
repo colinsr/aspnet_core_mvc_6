@@ -4,7 +4,7 @@ using Microsoft.AspNet.Mvc;
 using TheWorld_V2.Models;
 using TheWorld_V2.ViewModels;
 
-namespace TheWorld_V2.Controllers
+namespace TheWorld_V2.Controllers.Auth
 {
     public class AuthController : Controller
     {
@@ -15,10 +15,11 @@ namespace TheWorld_V2.Controllers
             _signInManager = signInManager;
         }
 
-        public IActionResult Login()
+        [HttpGet]
+        public ActionResult Login()
         {
-            if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Trips", "App");
+            //if (User.Identity.IsAuthenticated)
+            //    return RedirectToAction("Trips", "App");
 
             return View();
         }
