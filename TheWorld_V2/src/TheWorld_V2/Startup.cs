@@ -40,6 +40,8 @@ namespace TheWorld_V2
                 .AddSqlServer()
                 .AddDbContext<WorldContext>();
 
+            services.AddScoped<GeoService>();
+
             services.AddTransient<WorldContextSeedData>();
             services.AddScoped<IWorldRepository, WorldRepository>();
 

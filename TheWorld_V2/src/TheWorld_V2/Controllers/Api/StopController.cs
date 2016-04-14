@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Extensions.Logging;
 using TheWorld_V2.Models;
+using TheWorld_V2.Services;
 using TheWorld_V2.ViewModels;
 
 namespace TheWorld_V2.Controllers.Api
@@ -15,11 +17,13 @@ namespace TheWorld_V2.Controllers.Api
     {
         private readonly IWorldRepository _repo;
         private readonly ILogger<StopController> _logger;
+        private readonly GeoService _geoService;
 
-        public StopController(IWorldRepository repo, ILogger<StopController> logger)
+        public StopController(IWorldRepository repo, ILogger<StopController> logger, GeoService geoService)
         {
             _repo = repo;
             _logger = logger;
+            _geoService = geoService;
         }
 
         [HttpGet("")]
@@ -44,17 +48,25 @@ namespace TheWorld_V2.Controllers.Api
         }
 
         [HttpPost("")]
-        public JsonResult Post( string tripName, [FromBody] StopViewModel viewModel )
+        public async Task<JsonResult> Post( string tripName, [FromBody] StopViewModel viewModel )
         {
             try
             {
                 if ( ModelState.IsValid )
                 {
-                    //map
                     var newStop = Mapper.Map<Stop>( viewModel );
-                    //get GEO
 
-                    //save
+                    var geo = await _geoService.Lookup(viewModel.Name);
+
+                    if (!geo.Success)
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        return Json(geo.Message);
+                    }
+
+                    newStop.Latitude = geo.Latitude;
+                    newStop.Longitude = geo.Longitude;
+
                     _repo.AddStop( tripName, newStop );
 
                     if ( _repo.SaveAll() )
