@@ -38,7 +38,7 @@ namespace TheWorld_V2.Models
                 {
                     Name = "US Trip",
                     Created = DateTime.UtcNow,
-                    UserName = "",
+                    UserName = "colin",
                     Stops = GetUsStops()
                 };
 
@@ -49,7 +49,7 @@ namespace TheWorld_V2.Models
                 {
                     Name = "World Trip",
                     Created = DateTime.UtcNow,
-                    UserName = "",
+                    UserName = "colin",
                     Stops = GetWorldTrips()
                 };
 
