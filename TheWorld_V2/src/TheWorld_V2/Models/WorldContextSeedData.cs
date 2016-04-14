@@ -1,20 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace TheWorld_V2.Models
 {
     public class WorldContextSeedData
     {
         private readonly WorldContext _context;
+        private readonly UserManager<WorldUser> _userManger;
 
-        public WorldContextSeedData(WorldContext context)
+        public WorldContextSeedData(WorldContext context, UserManager<WorldUser> userManger)
         {
             _context = context;
+            _userManger = userManger;
         }
 
-        public void EnsureSeedData()
+        public async Task EnsureSeedDataAsync()
         {
+            if (await _userManger.FindByEmailAsync("colin@theworld.com") == null)
+            {
+                //add
+                var newUser = new WorldUser
+                {
+                    UserName    = "colin",
+                    Email       = "colin@theworld.com"
+                };
+
+                await _userManger.CreateAsync(newUser, "P@ssword!");
+            }
+
+
             if (!_context.Trips.Any())
             {
                 var usTrip = new Trip

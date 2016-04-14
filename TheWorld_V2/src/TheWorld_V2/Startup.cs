@@ -53,7 +53,7 @@ namespace TheWorld_V2
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, WorldContextSeedData seedData, ILoggerFactory loggerFactory)
+        public async void Configure(IApplicationBuilder app, WorldContextSeedData seedData, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddDebug(LogLevel.Warning);
 
@@ -68,7 +68,7 @@ namespace TheWorld_V2
 
             app.UseMvc(ConfigureRouteDefaults);
 
-            seedData.EnsureSeedData();
+            await seedData.EnsureSeedDataAsync();
         }
 
 
