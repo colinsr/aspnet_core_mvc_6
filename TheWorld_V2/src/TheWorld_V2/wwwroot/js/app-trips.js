@@ -1,6 +1,7 @@
-(function() {
-    "use string";
+(function () {
 
-    angular.module('app-trips', []);
-    
+    "use strict";
+
+    angular.module("app-trips", ["simpleControls"]);
+
 })();
