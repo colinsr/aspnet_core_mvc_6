@@ -37,9 +37,9 @@ namespace TheWorld_V2
         {
             services.AddMvc(config =>
             {
-#if !DEBUG
-                config.Filters.Add(new RequireHttpsAttribute());
-#endif
+//#if !DEBUG
+//                config.Filters.Add(new RequireHttpsAttribute());
+//#endif
             })
             .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
@@ -74,11 +74,11 @@ namespace TheWorld_V2
             services.AddTransient<WorldContextSeedData>();
             services.AddScoped<IWorldRepository, WorldRepository>();
 
-#if DEBUG
+//#if DEBUG
             services.AddScoped<IMailService, DebugMailService>();//wiring up DI here....
-#else
-            services.AddScoped<IMailService, MailService>();
-#endif
+//#else
+//            services.AddScoped<IMailService, MailService>();
+//#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
