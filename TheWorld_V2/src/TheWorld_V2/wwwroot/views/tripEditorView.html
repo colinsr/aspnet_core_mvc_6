@@ -8,17 +8,6 @@
 
         <div ng-show="vm.errorMessage" class="alert alert-danger">{{vm.errorMessage}}</div>
 
-        <table class="table table-responsive table-striped">
-            <tr>
-                <th>Location</th>
-                <th>Arrival</th>
-            </tr>
-            <tr ng-repeat="stop in vm.stops">
-                <td>{{stop.name}}</td>
-                <td>{{stop.arrival | date}}</td>
-            </tr>
-        </table>
-
         <form>
             <div class="form-group">
                 <label>Date</label>
@@ -32,6 +21,18 @@
                 <input type="submit" value="Add" class="btn btn-success"/>
             </div>
         </form>
+
+        <table class="table table-responsive table-striped">
+            <tr>
+                <th>Location</th>
+                <th>Arrival</th>
+            </tr>
+            <tr ng-repeat="stop in vm.stops">
+                <td>{{stop.name}}</td>
+                <td>{{stop.arrival | date}}</td>
+            </tr>
+        </table>
+
     </div>
 
     <div class="col-md-9">
